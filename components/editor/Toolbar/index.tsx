@@ -9,6 +9,7 @@ import Button from './Button';
 import { RiDoubleQuotesL } from 'react-icons/ri';
 import InsertLink from '../Link/InsertLink';
 import { linkOption } from '../Link/LinkForm';
+import EmbedYoutube from './EmbedYoutube';
 // import Underline from '@tiptap/extension-underline';
 
 interface Props {
@@ -47,6 +48,10 @@ const Toolbar: FC<Props> = ({ editor }): JSX.Element | null => {
       commands.setLink({
         href: url,
       });
+  };
+
+  const handleEmbedYoutube = (url: string) => {
+    editor.chain().focus().setYoutubeVideo({ src: url }).run();
   };
 
   return (
@@ -98,9 +103,7 @@ const Toolbar: FC<Props> = ({ editor }): JSX.Element | null => {
       </div>
       <div className="h-4 w-[1px] bg-secondary-dark dark:bg-secondary-light mx-8" />
       <div className="flex items-center space-x-2">
-        <Button>
-          <BsYoutube />
-        </Button>
+        <EmbedYoutube onSubmit={handleEmbedYoutube} />
         <Button>
           <BsImageFill />
         </Button>
